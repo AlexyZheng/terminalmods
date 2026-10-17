@@ -39,18 +39,24 @@ if (( IS_INTERACTIVE_SHELL )) && [ "$ENV_CLEANSED" != "1" ]; then
         SU_CMD="su"
     fi
 
-    cd /sdcard 2>/dev/null || cd /storage/emulated/0 2>/dev/null || cd /data/local/tmp 2>/dev/null
+    cd /storage/emulated/0 2>/dev/null || cd /sdcard 2>/dev/null || cd /data/local/tmp 2>/dev/null
 
     exec env -i \
-        PATH=/system/bin:/system/xbin:/product/bin:/apex/com.android.runtime/bin:/data/adb/ksu/bin:/data/adb/ap/bin \
+        PATH=/system/bin:/system/xbin:/product/bin:/apex/com.android.runtime/bin:/data/adb/ksu/bin:/data/adb/ap/bin:/data/local/tmp \
         TERM="${TERM:-xterm-256color}" \
-        HOME=/data \
+        HOME=/storage/emulated/0 \
         SHELL=/system/bin/sh \
         USER=root \
         ENV_CLEANSED=1 \
         LD_PRELOAD="" \
+        PS1='marble@root:~ # ' \
         "$SU_CMD" -m
 fi
+
+# Fallback path updates for non-interactive execution
+export PATH="$PATH:/data/local/tmp"
+
+
 
 ##################################################################################################################################################################################
 
