@@ -1,6 +1,6 @@
 id=terminalmods
-name=Terminal Modifications
-version=v1.5.0
-versionCode=150
-author=Skittles9823
-description=Android terminal - The way it should be
+name=Terminal Alias Modifications
+version=v1
+versionCode=1
+author=AlexyZheng
+description=Modify mksh terminal aliases
